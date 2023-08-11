@@ -43,6 +43,12 @@ app.UseEndpoints(endpoints =>
         await context.Response.WriteAsync($"Filename to download: {fileName}.{extension}");
     });
 
+    endpoints.Map("api/user/{id=guest}", async (context) =>
+    {
+        var id = context.Request.RouteValues["id"].ToString();
+        await context.Response.WriteAsync($"User's ID: {id}");
+    });
+
     endpoints.MapGet("api", async (context) =>
     {
         await context.Response.WriteAsync("only Get request");
